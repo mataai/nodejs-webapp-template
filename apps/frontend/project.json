@@ -1,27 +1,33 @@
 {
-  "name": "nodejs-webapp-template",
+  "name": "frontend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/nodejs-webapp-template/src",
+  "sourceRoot": "apps/frontend/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/nodejs-webapp-template",
-        "browser": "apps/nodejs-webapp-template/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/nodejs-webapp-template/tsconfig.app.json",
+        "outputPath": "dist/apps/frontend",
+        "browser": "apps/frontend/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "apps/frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/nodejs-webapp-template/public"
+            "input": "apps/frontend/public"
           }
         ],
-        "styles": ["apps/nodejs-webapp-template/src/styles.scss"]
+        "styles": [
+          "apps/frontend/src/styles.scss"
+        ]
       },
       "configurations": {
         "production": {
@@ -52,10 +58,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "nodejs-webapp-template:build:production"
+          "buildTarget": "frontend:build:production"
         },
         "development": {
-          "buildTarget": "nodejs-webapp-template:build:development"
+          "buildTarget": "frontend:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -63,7 +69,7 @@
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "nodejs-webapp-template:build"
+        "buildTarget": "frontend:build"
       }
     },
     "lint": {
@@ -71,19 +77,21 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
-        "jestConfig": "apps/nodejs-webapp-template/jest.config.ts",
-        "tsConfig": "apps/nodejs-webapp-template/tsconfig.spec.json"
+        "jestConfig": "apps/frontend/jest.config.ts",
+        "tsConfig": "apps/frontend/tsconfig.spec.json"
       }
     },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "nodejs-webapp-template:build",
+        "buildTarget": "frontend:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/nodejs-webapp-template/browser",
+        "staticFilePath": "dist/apps/frontend/browser",
         "spa": true
       }
     }
