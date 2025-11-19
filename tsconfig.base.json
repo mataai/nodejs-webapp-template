@@ -10,11 +10,45 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@webapp-template/auth-contracts": [
+        "libs/data-access/contracts/auth/src/index.ts"
+      ],
+      "@webapp-template/database": [
+        "libs/data-access/database/src/index.ts"
+      ],
+      "@webapp-template/enums": [
+        "libs/data-access/enums/src/index.ts"
+      ],
+      "@webapp-template/error-system": [
+        "libs/utils/systems/error/src/index.ts"
+      ],
+      "@webapp-template/function-utils": [
+        "libs/utils/functions/src/index.ts"
+      ],
+      "@webapp-template/generic-contracts": [
+        "libs/data-access/contracts/generic/src/index.ts"
+      ],
+      "@webapp-template/shared-environments": [
+        "libs/shared/environments/src/index.ts"
+      ],
+      "@webapp-template/shared-models": [
+        "libs/shared/models/src/index.ts"
+      ],
+      "@webapp-template/shared-translations": [
+        "libs/shared/translations/src/index.ts"
+      ],
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

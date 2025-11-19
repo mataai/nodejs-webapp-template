@@ -1,0 +1,6 @@
+{
+  "name": "@webapp-template/shared-environments",
+  "version": "0.0.1",
+  "peerDependencies": {},
+  "sideEffects": false
+}

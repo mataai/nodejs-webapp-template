@@ -66,8 +66,8 @@ export default [
               '^(@typeorm)(.*|$)',
               '^(rxjs)(.*|$)',
             ],
-            ['^(?!(@angular|rxjs|@next.lanets.ca|@lanets|./|../)).*$'],
-            ['^(@next.lanets.ca|@lanets)(.*|$)'],
+            ['^(?!(@angular|rxjs|@webapp-template/|./|../)).*$'],
+            ['^(@webapp-template|@nodejs-webapp-template)(.*|$)'],
             ['^(../)(.*|$)', '^(./)(.*|$)'],
           ],
         },
@@ -76,7 +76,7 @@ export default [
     },
   },
   {
-    files: ['**/*.ts'],
+    files: ['apps/**/*.ts'],
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
@@ -91,6 +91,27 @@ export default [
         {
           type: 'element',
           prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
+    },
+  },
+  {
+    files: ['libs/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'lib',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'lib',
           style: 'kebab-case',
         },
       ],

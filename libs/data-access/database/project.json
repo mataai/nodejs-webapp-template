@@ -1,0 +1,96 @@
+{
+  "name": "database",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/database/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "libs/data-access/database/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/data-access/database/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/data-access/database/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/data-access/database/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "typeorm": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          {
+            "command": "ts-node -r tsconfig-paths/register --project libs/data-access/database/tsconfig.migrations.json node_modules/typeorm/cli"
+          }
+        ]
+      }
+    },
+    "typeorm-migration-generate": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          {
+            "command": "nx run database:typeorm migration:generate libs/data-access/database/src/lib/migrations/$npm_config_name -d libs/data-access/database/src/lib/data-source.migration.config.ts --pretty"
+          }
+        ]
+      }
+    },
+    "typeorm-migration-create": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          {
+            "command": "nx run database:typeorm migration:create libs/data-access/database/src/lib/migrations/$npm_config_name"
+          }
+        ]
+      }
+    },
+    "typeorm-migration-run": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "envFile": ".env",
+        "commands": [
+          {
+            "command": "nx run database:typeorm migration:run -d libs/data-access/database/src/lib/data-source.migration.config.ts"
+          }
+        ]
+      }
+    },
+    "typeorm-migration-revert": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "envFile": ".env",
+        "commands": [
+          {
+            "command": "nx run database:typeorm migration:revert -d libs/data-access/database/src/lib/data-source.migration.config.ts"
+          }
+        ]
+      }
+    }
+  }
+}

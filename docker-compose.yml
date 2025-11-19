@@ -1,0 +1,27 @@
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    ports:
+      - "${MARIADB_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ajfsiodsjfneslkmfd
+    env_file:
+      - .env
+  api:
+    image: lanets-api:main
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+  web:
+    image: lanets-web:main
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
