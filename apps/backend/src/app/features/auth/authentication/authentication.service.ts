@@ -53,6 +53,7 @@ export class AuthenticationService {
     try {
       tokenData = this._jwtService.verify(body.refreshToken);
     } catch (e) {
+      console.error(e);
       throw new UnauthorizedException();
     }
     // TODO 2 check if token id is blocked in the database (EX if we implement a user ban system)

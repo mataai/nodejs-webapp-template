@@ -26,8 +26,8 @@ export class GroupsMappingProfile extends AutomapperProfile {
         GroupBaseDTO,
         forMember(
           (d) => d.memberCount,
-          mapFrom((s) => s.members.length),
-        ),
+          mapFrom((s) => s.members.length)
+        )
       );
       createMap(
         mapper,
@@ -35,12 +35,12 @@ export class GroupsMappingProfile extends AutomapperProfile {
         GroupDTO,
         forMember(
           (d) => d.members,
-          mapFrom((s) => s.members),
+          mapFrom((s) => s.members)
         ),
         forMember(
           (d) => d.permissions,
-          mapFrom((s) => s.permissions),
-        ),
+          mapFrom((s) => s.permissions)
+        )
       );
       createMap(mapper, GroupDTO, Group);
     };

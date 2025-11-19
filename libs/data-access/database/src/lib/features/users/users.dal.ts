@@ -21,7 +21,7 @@ import { User } from './user.model';
 export class UsersDAL {
   constructor(
     private _dataSource: DataSource,
-    private _databaseHistoryService: DatabaseHistoryService,
+    private _databaseHistoryService: DatabaseHistoryService
   ) {}
 
   private get _usersRepository(): Repository<User> {
@@ -30,7 +30,7 @@ export class UsersDAL {
 
   public async findOneById(
     id: string,
-    relations?: FindOptionsRelations<User>,
+    relations?: FindOptionsRelations<User>
   ): Promise<User | null> {
     return this._usersRepository.findOne({
       where: { id },
@@ -42,14 +42,14 @@ export class UsersDAL {
     return this._usersRepository.findOneBy({ email });
   }
   public async users(
-    options: FindManyOptions<User>,
+    options: FindManyOptions<User>
   ): Promise<[User[], number]> {
     return this._usersRepository.findAndCount(options);
   }
 
   public async createUser(
     data: DeepPartial<User>,
-    author: User | User['id'],
+    author: User | User['id']
   ): Promise<User | null> {
     try {
       const generatedModel = this._usersRepository.create(data);
@@ -80,7 +80,7 @@ export class UsersDAL {
   public async updateUser(
     id: User['id'],
     data: QueryDeepPartialEntity<User>,
-    author: User | User['id'],
+    author: User | User['id']
   ): Promise<User | null> {
     const old = await this._usersRepository.findOneBy({ id });
     if (!old) {
@@ -112,7 +112,7 @@ export class UsersDAL {
 
   public async deleteUser(
     id: User['id'],
-    author: User | User['id'],
+    author: User | User['id']
   ): Promise<boolean> {
     const old = JSON.stringify(await this._usersRepository.findOneBy({ id }));
     const result = await this._usersRepository.softDelete(id);
@@ -135,7 +135,7 @@ export class UsersDAL {
   public async addGroupsToUser(
     id: string,
     groupIds: string[],
-    author: User,
+    author: User
   ): Promise<User> {
     try {
       const user = await this._usersRepository.findOne({
@@ -149,7 +149,7 @@ export class UsersDAL {
       const newGroups = [];
 
       for (const groupId of groupIds) {
-        if (!user.groups.some(g => g.id == groupId)) {
+        if (!user.groups.some((g) => g.id == groupId)) {
           newGroups.push({ id: groupId });
         }
       }
@@ -166,7 +166,7 @@ export class UsersDAL {
         action: Action.Create,
         authorId: author instanceof User ? author.id : author,
         userId: updatedData.id,
-        oldData: JSON.stringify({ groups: oldGroups.map(g => g.id) }),
+        oldData: JSON.stringify({ groups: oldGroups.map((g) => g.id) }),
         newData: JSON.stringify({ groups: newGroups }),
       } as DeepPartial<GroupLogs>);
 
@@ -185,7 +185,7 @@ export class UsersDAL {
   public async removeGroupsFromUser(
     id: string,
     groupIds: string[],
-    author: User,
+    author: User
   ): Promise<User> {
     try {
       const user = await this._usersRepository.findOne({
@@ -199,7 +199,7 @@ export class UsersDAL {
       const newGroups: string[] = [];
 
       for (const groupId of groupIds) {
-        if (user.groups.some(g => g.id == groupId)) {
+        if (user.groups.some((g) => g.id == groupId)) {
           newGroups.push(groupId);
         }
       }
@@ -209,14 +209,14 @@ export class UsersDAL {
 
       const updatedData = await this._usersRepository.save({
         ...user,
-        groups: oldGroups.filter(g => !newGroups.includes(g.id)),
+        groups: oldGroups.filter((g) => !newGroups.includes(g.id)),
       });
 
       this._databaseHistoryService.createUserLog({
         action: Action.Delete,
         authorId: author instanceof User ? author.id : author,
         userId: updatedData.id,
-        oldData: JSON.stringify({ groups: oldGroups.map(g => g.id) }),
+        oldData: JSON.stringify({ groups: oldGroups.map((g) => g.id) }),
         newData: JSON.stringify({ groups: newGroups }),
       } as DeepPartial<GroupLogs>);
 
@@ -225,6 +225,7 @@ export class UsersDAL {
         relations: ['groups'],
       }) as Promise<User>;
     } catch (e) {
+      console.error(e);
       throw new BadRequestException('Failed to remove groups from user');
     }
   }
