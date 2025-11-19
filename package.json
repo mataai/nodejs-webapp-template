@@ -2,7 +2,14 @@
   "name": "@webapp-template/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "api": "nx serve backend",
+    "web": "nx serve frontend",
+    "all": "npm run start",
+    "start": "nx run-many --target=serve --all",
+    "lint": "nx run-many --target=lint --all",
+    "lint:fix": "nx run-many --target=lint --all --fix"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~20.3.0",

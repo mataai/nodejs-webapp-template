@@ -6,13 +6,13 @@ export const angularEslintConfig = [
   ...nx.configs['flat/angular'],
   ...nx.configs['flat/angular-template'],
   {
-    files: ['apps/**/*.ts'],
+    files: ['**/*.ts'],
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: ['app', 'lib'],
           style: 'camelCase',
         },
       ],
@@ -20,28 +20,7 @@ export const angularEslintConfig = [
         'error',
         {
           type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
-        },
-      ],
-    },
-  },
-  {
-    files: ['libs/**/*.ts'],
-    rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'lib',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'lib',
+          prefix: ['app', 'lib'],
           style: 'kebab-case',
         },
       ],
