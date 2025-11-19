@@ -17,10 +17,7 @@ import { PaginatedResponseDto } from '@webapp-template/generic-contracts';
 
 @Injectable()
 export class UsersService {
-  private readonly authorizedRelations: (keyof User)[] = [
-    'gameProfiles',
-    'groups',
-  ];
+  private readonly authorizedRelations: (keyof User)[] = ['groups'];
   constructor(private _usersRepository: UsersDAL) {}
 
   /**
@@ -30,7 +27,7 @@ export class UsersService {
    */
   public findOneById(
     id: string,
-    relationsList: string[] = [],
+    relationsList: string[] = []
   ): Promise<User | null> {
     const relations = {} as {
       [key: string]: FindOptionsRelationsProperty<User> | boolean;
@@ -83,7 +80,6 @@ export class UsersService {
    */
   public findOneForGuard(id: User['id']): Promise<User | null> {
     return this._usersRepository.findOneById(id, {
-      gameProfiles: true,
       groups: {
         permissions: true,
       },
@@ -94,7 +90,7 @@ export class UsersService {
     page = 0,
     pageSize = 10,
     where: FindOptionsWhere<User>,
-    order: FindOptionsOrder<User>,
+    order: FindOptionsOrder<User>
   ): Promise<PaginatedResponseDto<User>> {
     const options: FindManyOptions<User> = {
       skip: pageSize * page,
@@ -122,13 +118,13 @@ export class UsersService {
       .users(options)
       .then(
         (users) =>
-          new PaginatedResponseDto<User>(users[0], users[1], page, pageSize),
+          new PaginatedResponseDto<User>(users[0], users[1], page, pageSize)
       );
   }
 
   public async createUser(
     data: UserCreateRequestDTO,
-    author: User,
+    author: User
   ): Promise<User> {
     return this._usersRepository.createUser(data, author);
   }
@@ -136,7 +132,7 @@ export class UsersService {
   public async updateUser(
     id: User['id'],
     data: UserUpdateRequestDTO,
-    author: User,
+    author: User
   ): Promise<User> {
     return this._usersRepository.updateUser(id, data, author);
   }
@@ -148,7 +144,7 @@ export class UsersService {
   public addUserToGroups(
     id: string,
     groupIds: UserAssignGroupsDTO,
-    author: User,
+    author: User
   ): Promise<User> {
     return this._usersRepository.addGroupsToUser(id, groupIds.groupIds, author);
   }
@@ -156,12 +152,12 @@ export class UsersService {
   public removeUserFromGroups(
     id: string,
     groupIds: UserAssignGroupsDTO,
-    author: User,
+    author: User
   ): Promise<User> {
     return this._usersRepository.removeGroupsFromUser(
       id,
       groupIds.groupIds,
-      author,
+      author
     );
   }
 }

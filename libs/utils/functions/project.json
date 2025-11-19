@@ -5,22 +5,14 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/utils/functions",
-        "main": "libs/utils/functions/src/index.ts",
-        "tsConfig": "libs/utils/functions/tsconfig.lib.json",
-        "assets": ["libs/utils/functions/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "libs/utils/functions/jest.config.ts"
       }

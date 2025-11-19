@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Patch,
   Post,
@@ -35,7 +34,7 @@ export class TemplateController {
     @Query('skip') skip: number,
     @Query('take') take: number,
     @Query('where') where: string,
-    @Query('orderBy') orderBy: string,
+    @Query('orderBy') orderBy: string
   ): Promise<MODEL[]> {
     console.log(skip, take, where, orderBy);
     throw new Error('Method not implemented.');
@@ -55,7 +54,7 @@ export class TemplateController {
   @UseInterceptors(MapInterceptor(MODEL, MODELDTO))
   public create(
     @Body() body: MODELCreateRequestDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     console.log(body, author);
     throw new Error('Method not implemented.');
@@ -68,7 +67,7 @@ export class TemplateController {
   public update(
     @Param('id') id: string,
     @Body() body: MODELUpdateRequestDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     console.log(id, body, author);
     throw new Error('Method not implemented.');
@@ -76,7 +75,7 @@ export class TemplateController {
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiAcceptedResponse({ type: MODELDTO, status: HttpStatus.ACCEPTED })
+  @ApiAcceptedResponse({ type: MODELDTO })
   public delete(@Param('id') id: string, @RequestUser() author: User) {
     console.log(id, author);
     throw new Error('Method not implemented.');

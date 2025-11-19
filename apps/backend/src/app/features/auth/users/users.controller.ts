@@ -34,7 +34,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(
     private _usersService: UsersService,
-    @InjectMapper() private readonly _mapper: Mapper,
+    @InjectMapper() private readonly _mapper: Mapper
   ) {}
 
   @Get()
@@ -44,7 +44,7 @@ export class UsersController {
     @Query('page') page = 1,
     @Query('pageSize') pageSize = 10,
     @Query('where') where: string | null,
-    @Query('orderBy') orderBy: string | null,
+    @Query('orderBy') orderBy: string | null
   ): Promise<PaginatedResponseDto<UserDTO>> {
     console.log(page, pageSize);
     return this._usersService
@@ -52,7 +52,7 @@ export class UsersController {
         page - 1,
         pageSize,
         where ? JSON.parse(where) : '',
-        orderBy ? JSON.parse(orderBy) : '',
+        orderBy ? JSON.parse(orderBy) : ''
       )
       .then((result) => {
         return {
@@ -68,7 +68,7 @@ export class UsersController {
   @UseInterceptors(MapInterceptor(User, UserDTO))
   public get(
     @Param('id') id: string,
-    @Query('relations') relations: string,
+    @Query('relations') relations: string
   ): Promise<User | null> {
     return this._usersService.findOneById(id, relations.split(','));
   }
@@ -79,7 +79,7 @@ export class UsersController {
   @UseInterceptors(MapInterceptor(User, UserDTO))
   public create(
     @Body() body: UserCreateRequestDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     return this._usersService.createUser(body, author);
   }
@@ -91,14 +91,14 @@ export class UsersController {
   public update(
     @Param('id') id: string,
     @Body() body: UserUpdateRequestDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     return this._usersService.updateUser(id || author.id, body, author);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiAcceptedResponse({ type: UserDTO, status: HttpStatus.ACCEPTED })
+  @ApiAcceptedResponse({ type: UserDTO })
   public delete(@Param('id') id: string, @RequestUser() author: User) {
     return this._usersService.deleteUser(id || author.id, author);
   }
@@ -110,7 +110,7 @@ export class UsersController {
   public addUserToGroups(
     @Param('id') id: string,
     @Body() groupIds: UserAssignGroupsDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     return this._usersService.addUserToGroups(id, groupIds, author);
   }
@@ -121,7 +121,7 @@ export class UsersController {
   public removeUserGroups(
     @Param('id') id: string,
     @Body() groupIds: UserAssignGroupsDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     return this._usersService.removeUserFromGroups(id, groupIds, author);
   }

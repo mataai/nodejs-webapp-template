@@ -3,14 +3,10 @@ import * as mysqlDriver from 'mysql2';
 import { DataSourceOptions } from 'typeorm';
 
 import {
-  GameProfile,
-  GameProfileLogs,
   Group,
   GroupLogs,
   Permission,
   PermissionLogs,
-  Tournament,
-  TournamentLogs,
   TranslatedString,
   TranslatedStringLogs,
   User,
@@ -19,16 +15,12 @@ import {
 
 export const entities = [
   User,
-  Tournament,
   Group,
   Permission,
-  GameProfile,
   UserLogs,
   TranslatedString,
-  TournamentLogs,
   GroupLogs,
   PermissionLogs,
-  GameProfileLogs,
   TranslatedStringLogs,
 ];
 

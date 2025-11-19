@@ -3,10 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, DeepPartial, Repository } from 'typeorm';
 
 import {
-  GameProfileLogs,
   GroupLogs,
   PermissionLogs,
-  TournamentLogs,
   TranslatedStringLogs,
   UserLogs,
 } from './features/logs';
@@ -17,14 +15,6 @@ export class DatabaseHistoryService {
 
   private get _userLogsRepository(): Repository<UserLogs> {
     return this._dataSource.getRepository(UserLogs);
-  }
-
-  private get _tournamentLogsRepository(): Repository<TournamentLogs> {
-    return this._dataSource.getRepository(TournamentLogs);
-  }
-
-  private get _gameProfileLogsRepository(): Repository<GameProfileLogs> {
-    return this._dataSource.getRepository(GameProfileLogs);
   }
 
   private get _permissionsLogsRepository(): Repository<PermissionLogs> {
@@ -44,22 +34,8 @@ export class DatabaseHistoryService {
     return this._userLogsRepository.save(generatedLog);
   }
 
-  public createTournamentLog(
-    data: DeepPartial<TournamentLogs>,
-  ): Promise<TournamentLogs> {
-    const generatedLog = this._tournamentLogsRepository.create(data);
-    return this._tournamentLogsRepository.save(generatedLog);
-  }
-
-  public createGameProfileLog(
-    data: DeepPartial<GameProfileLogs>,
-  ): Promise<GameProfileLogs> {
-    const generatedLog = this._gameProfileLogsRepository.create(data);
-    return this._gameProfileLogsRepository.save(generatedLog);
-  }
-
   public createPermissionLog(
-    data: DeepPartial<PermissionLogs>,
+    data: DeepPartial<PermissionLogs>
   ): Promise<PermissionLogs> {
     const generatedLog = this._permissionsLogsRepository.create(data);
     return this._permissionsLogsRepository.save(generatedLog);
@@ -68,17 +44,17 @@ export class DatabaseHistoryService {
   public createGroupLog(data: DeepPartial<GroupLogs>): Promise<GroupLogs>;
   public createGroupLog(data: DeepPartial<GroupLogs>[]): Promise<GroupLogs[]>;
   public createGroupLog(
-    data: DeepPartial<GroupLogs> | DeepPartial<GroupLogs>[],
+    data: DeepPartial<GroupLogs> | DeepPartial<GroupLogs>[]
   ): Promise<GroupLogs | GroupLogs[]> {
     const generatedLog = this._groupLogsRepository.create(
-      Array.isArray(data) ? data : [data],
+      Array.isArray(data) ? data : [data]
     );
     const result = this._groupLogsRepository.save(generatedLog);
-    return Array.isArray(data) ? result : result.then(x => x[0]);
+    return Array.isArray(data) ? result : result.then((x) => x[0]);
   }
 
   public createTranslatedStringLog(
-    data: DeepPartial<TranslatedStringLogs>,
+    data: DeepPartial<TranslatedStringLogs>
   ): Promise<TranslatedStringLogs> {
     const generatedLog = this._translatedStringLogsRepository.create(data);
     return this._translatedStringLogsRepository.save(generatedLog);

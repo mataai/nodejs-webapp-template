@@ -5,7 +5,6 @@ import { AutomapperModule } from '@automapper/nestjs';
 
 import { GroupsMappingProfile } from './profiles/group.mapping-profile';
 import { PermissionsMappingProfile } from './profiles/permission.mapping-profile';
-import { TournamentsMappingProfile } from './profiles/tournament.mapping-profile';
 import { UserMappingProfile } from './profiles/users.mapping-profile';
 
 @Module({
@@ -14,13 +13,11 @@ import { UserMappingProfile } from './profiles/users.mapping-profile';
     UserMappingProfile,
     PermissionsMappingProfile,
     GroupsMappingProfile,
-    TournamentsMappingProfile,
   ],
   exports: [
     UserMappingProfile,
     PermissionsMappingProfile,
     GroupsMappingProfile,
-    TournamentsMappingProfile,
   ],
 })
 export class MappingModule {

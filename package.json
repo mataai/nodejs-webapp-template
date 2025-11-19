@@ -19,12 +19,24 @@
     "@angular/platform-browser": "~20.3.0",
     "@angular/platform-browser-dynamic": "~20.3.0",
     "@angular/router": "~20.3.0",
+    "@automapper/classes": "^8.8.1",
+    "@automapper/nestjs": "^8.8.1",
+    "@casl/ability": "^6.7.3",
     "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.0",
+    "@nestjs/jwt": "^11.0.1",
+    "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/swagger": "^11.2.3",
+    "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.6.0",
+    "mysql2": "^3.15.3",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
+    "typeorm": "^0.3.27",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
@@ -74,5 +86,12 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.46.4",
     "webpack-cli": "^5.1.4"
+  },
+  "overrides": {
+    "@automapper/nestjs": {
+      "@nestjs/common": "^11.0.0",
+      "@nestjs/core": "^11.0.0",
+      "rxjs": "~7.8.0"
+    }
   }
 }

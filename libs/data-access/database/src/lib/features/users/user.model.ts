@@ -4,12 +4,10 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { Group } from '../permissions';
-import { GameProfile } from '../tournaments';
 
 @Entity()
 export class User {
@@ -28,11 +26,7 @@ export class User {
   @AutoMap()
   public displayName!: string;
 
-  @OneToMany(() => GameProfile, gameProfile => gameProfile.player)
-  @AutoMap()
-  public gameProfiles!: GameProfile[];
-
-  @ManyToMany(() => Group, group => group.members)
+  @ManyToMany(() => Group, (group) => group.members)
   @AutoMap()
   @JoinTable()
   public groups!: Group[];

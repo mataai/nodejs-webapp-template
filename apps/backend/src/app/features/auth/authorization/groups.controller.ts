@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Patch,
   Post,
@@ -41,13 +40,13 @@ export class GroupsController {
     @Query('skip') skip: number,
     @Query('take') take: number,
     @Query('where') where: string,
-    @Query('orderBy') orderBy: string,
+    @Query('orderBy') orderBy: string
   ) {
     return this._authService.getGroups(
       skip,
       take,
       where?.split(','),
-      orderBy?.split(','),
+      orderBy?.split(',')
     );
   }
 
@@ -65,7 +64,7 @@ export class GroupsController {
   @UseInterceptors(MapInterceptor(Group, GroupDTO))
   public create(
     @RequestUser() author: User,
-    @Body() body: GroupCreateRequestDTO,
+    @Body() body: GroupCreateRequestDTO
   ) {
     return this._authService.createGroup(body, author);
   }
@@ -78,7 +77,7 @@ export class GroupsController {
   public update(
     @Param('id') id: string,
     @Body() body: GroupUpdateRequestDTO,
-    @RequestUser() author: User,
+    @RequestUser() author: User
   ) {
     return this._authService.updateGroup(id, body, author);
   }
@@ -86,7 +85,7 @@ export class GroupsController {
   @Delete(':id')
   @UseGuards(AuthGuard, PoliciesGuard)
   @CheckPolicies((ability) => ability.can(Action.Delete, Group))
-  @ApiAcceptedResponse({ type: GroupDTO, status: HttpStatus.ACCEPTED })
+  @ApiAcceptedResponse({ type: GroupDTO })
   public delete(@Param('id') id: string, @RequestUser() author: User) {
     return this._authService.deleteGroup(id, author);
   }
@@ -98,7 +97,7 @@ export class GroupsController {
   public addPermissionToGroup(
     @Param('id') groupId: string,
     @RequestUser() author: User,
-    @Body() body: GroupAssignPermissionsDTO,
+    @Body() body: GroupAssignPermissionsDTO
   ) {
     return this._authService.assignPermissionsToGroup(groupId, body, author);
   }
@@ -109,7 +108,7 @@ export class GroupsController {
   public removePermissionToGroup(
     @Param('id') groupId: string,
     @RequestUser() author: User,
-    @Body() body: GroupAssignPermissionsDTO,
+    @Body() body: GroupAssignPermissionsDTO
   ) {
     return this._authService.removePermissionsFromGroup(groupId, body, author);
   }

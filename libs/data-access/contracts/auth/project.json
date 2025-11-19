@@ -6,29 +6,6 @@
   "tags": [],
   "// targets": "to see all targets run: nx show project auth-contracts --web",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/data-access/contracts/auth/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/data-access/contracts/auth/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/data-access/contracts/auth/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "libs/data-access/contracts/auth/jest.config.ts"
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint"
     }

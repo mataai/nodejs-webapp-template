@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 
 import { Action } from '../permissions';
-import { Game } from '../tournaments';
 
 export abstract class LogBase {
   @PrimaryGeneratedColumn()
@@ -68,20 +67,3 @@ export class TranslatedStringLogs extends LogBase {
   public key!: string;
 }
 
-@Entity()
-export class TournamentLogs extends LogBase {
-  @Column()
-  public tournamentId!: string;
-}
-
-@Entity()
-export class GameProfileLogs extends LogBase {
-  @Column()
-  public playerId!: string;
-
-  @Column({
-    type: 'enum',
-    enum: Game,
-  })
-  public game!: Game;
-}
