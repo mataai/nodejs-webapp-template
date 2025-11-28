@@ -7,7 +7,9 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
   },
   {
     ignores: ['.expo', 'web-build', 'cache', 'dist'],

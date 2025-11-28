@@ -62,11 +62,12 @@ export const baseConfig = [
           groups: [
             [
               '^(@angular)(.*|$)',
+              '^(react)(.*|$)',
               '^(@nestjs)(.*|$)',
               '^(@typeorm)(.*|$)',
               '^(rxjs)(.*|$)',
             ],
-            ['^(?!(@angular|rxjs|@webapp-template/|./|../)).*$'],
+            ['^(?!(@angular|rxjs|react|@nestjs|@typeorm|@webapp-template|@nodejs-webapp-template|./|../)).*$'],
             ['^(@webapp-template|@nodejs-webapp-template)(.*|$)'],
             ['^(../)(.*|$)', '^(./)(.*|$)'],
           ],
